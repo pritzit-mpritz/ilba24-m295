@@ -9,7 +9,7 @@ namespace M295_ILBA24.Services;
 
 public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContext)
 {
-    public async Task<ICollection<ActorResponseDto>> GetAllActorsAsync(int actorId, int page = 1, int pageSize = 10)
+    public async Task<List<ActorResponseDto>> GetAllActorsAsync(int actorId, int page = 1, int pageSize = 10)
     {
         var pagedActors = dbContext.Actors
             .Where(actor => actor.ActorId == actorId || actorId <= 0)
@@ -17,6 +17,7 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
             .ThenInclude(fa => fa.Film)
             .Skip((page - 1) * pageSize)
             .Take(pageSize);
+        
         var pagedActorsResponse = await pagedActors.ToListAsync();
         return pagedActorsResponse.Select(GenerateActorResponseDto).ToList();
     }
@@ -59,14 +60,14 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
                 )).ToList());
     }
 
-    public async Task<Actor> CreateActorAsync([FromBody] Actor actor)
+    public async Task<ActorResponseDto> CreateActorAsync([FromBody] Actor actor)
     {
         logger.LogInformation("Creating actor {@actor}", actor);
 
         dbContext.Actors.Add(actor);
         await dbContext.SaveChangesAsync();
 
-        return actor;
+        return await GetActorByIdAsync(actor.ActorId);
     }
 
     public async Task UpdateActorAsync(ushort id, [FromBody] Actor actor)

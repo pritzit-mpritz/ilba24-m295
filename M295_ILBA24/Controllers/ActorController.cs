@@ -15,9 +15,16 @@ public class ActorController(ILogger<ActorController> logger, ActorService servi
     /// <summary>
     /// Fetches all actors from the database
     /// </summary>
+    /// <param name="actorId">The id of the action to filter for</param>
+    /// <param name="page">The page to load</param>
+    /// <param name="pageSize">The page-size - default is 10 elements per page</param>
     /// <returns>
     /// A collection of all actors
     /// </returns>
+    /// <code>
+    /// GET /actor
+    /// </code>
+    /// <response code="200">Returns all actors</response>
     [HttpGet]
     public async Task<ActionResult<ICollection<ActorResponseDto>>> GetAllActorsAsync(
         [FromQuery] int actorId,
