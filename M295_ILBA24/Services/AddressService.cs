@@ -2,6 +2,7 @@ using M295_ILBA24.Context;
 using M295_ILBA24.DTOs;
 using M295_ILBA24.Entities;
 using M295_ILBA24.Exceptions;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace M295_ILBA24.Services;
@@ -17,13 +18,11 @@ public class AddressService(ILogger<AddressService> logger, SakilaDbContext cont
             .ThenInclude(c => c.Country)
             .ToListAsync();
 
-        var mappedAddresses = addressEntities.Select(
-            addressEntity => GenerateDtoResponse(addressEntity)
-            );
-        
+        var mappedAddresses = addressEntities.Adapt<List<AddressResponseDto>>();
+
         return mappedAddresses.ToList();
     }
-    
+
     public async Task<AddressResponseDto> FindAddressById(ushort id)
     {
         logger.LogInformation("FindAddressById called with id {id}", id);
@@ -38,35 +37,10 @@ public class AddressService(ILogger<AddressService> logger, SakilaDbContext cont
         {
             throw new ResourceNotFoundException("Could not find address with ID " + id);
         }
-        
-        var mappedAddress = GenerateDtoResponse(addressEntity);
-        
-        return mappedAddress;
-    }
 
-    private static AddressResponseDto GenerateDtoResponse(Address addressEntity)
-    {
-        var country = new BaseCountryResponseDto();
-        country.CountryId = addressEntity.City.Country.CountryId;
-        country.Country1 = addressEntity.City.Country.Country1;
-                
-        var city = new BaseCityResponseDto();
-        city.CityId = addressEntity.City.CityId;
-        city.City1 = addressEntity.City.City1;
-        city.CountryId = addressEntity.City.CountryId;
-        city.Country = country;
-                
-        var address = new AddressResponseDto();
-        address.AddressId = addressEntity.AddressId;
-        address.Address1 = addressEntity.Address1;
-        address.Address2 = addressEntity.Address2;
-        address.District = addressEntity.District;
-        address.Phone = addressEntity.Phone;
-        address.PostalCode = addressEntity.PostalCode;
-        address.CityId = addressEntity.CityId;
-        address.City = city;
-                
-        return address;
+        var mappedAddress = addressEntity.Adapt<AddressResponseDto>();
+
+        return mappedAddress;
     }
 
     public async Task<AddressResponseDto> CreateAddress(AddressRequestDto addressRequestDto)
@@ -78,10 +52,10 @@ public class AddressService(ILogger<AddressService> logger, SakilaDbContext cont
         address.CityId = addressRequestDto.CityId ?? 0;
         address.PostalCode = addressRequestDto.PostalCode;
         address.Phone = addressRequestDto.Phone!;
-        
+
         await context.Addresses.AddAsync(address);
         await context.SaveChangesAsync();
-        
+
         return new AddressResponseDto
         {
             AddressId = address.AddressId,
@@ -97,8 +71,8 @@ public class AddressService(ILogger<AddressService> logger, SakilaDbContext cont
     public async Task<AddressResponseDto> UpdateAddressAsync(ushort id, AddressRequestDto addressRequestDto)
     {
         var address = await context.Addresses.FindAsync(id);
-        
-        if(address == null)
+
+        if (address == null)
         {
             throw new ResourceNotFoundException("Could not find address with ID " + id);
         }
@@ -109,9 +83,9 @@ public class AddressService(ILogger<AddressService> logger, SakilaDbContext cont
         address.CityId = addressRequestDto.CityId ?? 0;
         address.PostalCode = addressRequestDto.PostalCode;
         address.Phone = addressRequestDto.Phone ?? "";
-        
+
         await context.SaveChangesAsync();
-        
+
         return await FindAddressById(address.AddressId);
     }
 }

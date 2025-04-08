@@ -50,7 +50,7 @@ public class ActorController(ILogger<ActorController> logger, ActorService servi
     }
 
     [HttpPost]
-    public async Task<ActionResult<Actor>> CreateActorAsync([FromBody] Actor actor)
+    public async Task<ActionResult<ActorResponseDto>> CreateActorAsync([FromBody] ActorResponseDto actor)
     {
         return Created("", await service.CreateActorAsync(actor));
     }
@@ -75,6 +75,20 @@ public class ActorController(ILogger<ActorController> logger, ActorService servi
         try
         {
             await service.DeleteActorAsync(id);
+            return NoContent();
+        }
+        catch (ResourceNotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+    
+    [HttpPost("{actorId:int}/film/{filmId:int}")]
+    public async Task<ActionResult> AddFilmToActorAsync(ushort actorId, ushort filmId)
+    {
+        try
+        {
+            await service.AddFilmToActorAsync(actorId, filmId);
             return NoContent();
         }
         catch (ResourceNotFoundException e)

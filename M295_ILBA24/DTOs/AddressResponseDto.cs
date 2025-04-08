@@ -1,6 +1,6 @@
 namespace M295_ILBA24.DTOs;
 
-public class AddressResponseDto
+public class BaseAddressResponseDto
 {
     public ushort AddressId { get; set; }
 
@@ -15,6 +15,9 @@ public class AddressResponseDto
     public string? PostalCode { get; set; }
 
     public string Phone { get; set; } = null!;
-    
+}
+
+public class AddressResponseDto : BaseAddressResponseDto
+{
     public virtual BaseCityResponseDto City { get; set; } = null!;
 }

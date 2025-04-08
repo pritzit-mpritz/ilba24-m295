@@ -2,6 +2,7 @@ using M295_ILBA24.Context;
 using M295_ILBA24.DTOs;
 using M295_ILBA24.Entities;
 using M295_ILBA24.Exceptions;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,11 +61,11 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
                 )).ToList());
     }
 
-    public async Task<ActorResponseDto> CreateActorAsync([FromBody] Actor actor)
+    public async Task<ActorResponseDto> CreateActorAsync(ActorResponseDto actor)
     {
         logger.LogInformation("Creating actor {@actor}", actor);
 
-        dbContext.Actors.Add(actor);
+        dbContext.Actors.Add(actor.Adapt<Actor>());
         await dbContext.SaveChangesAsync();
 
         return await GetActorByIdAsync(actor.ActorId);
@@ -95,5 +96,32 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
 
         dbContext.Actors.Remove(actor);
         await dbContext.SaveChangesAsync();
+    }
+
+    public async Task AddFilmToActorAsync(ushort actorId, ushort filmId)
+    {
+        var actor = await dbContext.Actors
+            .Include(a => a.FilmActors)
+            .Where(a => 
+                a.ActorId == actorId 
+                        && a.FilmActors
+                .All(fa => fa.FilmId != filmId)).FirstOrDefaultAsync();
+        
+        if (actor == null)
+            throw new ResourceNotFoundException("Could not find actor with ID " + actorId + " or actor is already in film with ID " + filmId);
+        
+        var film = await dbContext.Films.FindAsync(filmId);
+        
+        if (film == null)
+            throw new ResourceNotFoundException("Could not find film with ID " + filmId);
+
+        var filmActor = new FilmActor();
+        filmActor.ActorId = actorId;
+        filmActor.FilmId = filmId;
+        filmActor.LastUpdate = DateTime.Now;
+        
+        dbContext.FilmActors.Add(filmActor);
+        await dbContext.SaveChangesAsync();
+        logger.LogInformation("Added film with ID {filmId} to actor with ID {actorId}", filmId, actorId);
     }
 }

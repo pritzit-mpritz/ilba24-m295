@@ -10,3 +10,8 @@ public class BaseCityResponseDto
     
     public virtual BaseCountryResponseDto Country { get; set; } = null!;
 }
+
+public class CityResponseDto : BaseCityResponseDto
+{
+    public virtual ICollection<BaseAddressResponseDto> Addresses { get; set; } = new List<BaseAddressResponseDto>();
+}

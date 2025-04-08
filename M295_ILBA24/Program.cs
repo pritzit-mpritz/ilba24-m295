@@ -1,6 +1,7 @@
 using System.Reflection;
 using M295_ILBA24.Context;
 using M295_ILBA24.Services;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -20,8 +21,11 @@ builder.Services.AddDbContext<SakilaDbContext>(optionsBuilder =>
     )
 );
 
+builder.Services.AddMapster();
+
 builder.Services.AddScoped<ActorService>();
 builder.Services.AddScoped<AddressService>();
+builder.Services.AddScoped<CityService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
