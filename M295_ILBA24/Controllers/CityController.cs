@@ -45,7 +45,11 @@ public class CityController(ILogger<CityController> logger, CityService service)
         var city = await service.CreateCity(requestDto);
         logger.LogInformation("Created city {city}", city);
         
-        return CreatedAtAction(nameof(GetCityById), new { id = city.CityId }, city);
+        return CreatedAtAction(
+            nameof(GetCityById), 
+            new { id = city.CityId }, 
+            city
+        );
     }
     
     [HttpPut("{id:int}")]

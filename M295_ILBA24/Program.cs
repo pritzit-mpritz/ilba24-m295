@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Configure Serilog from appsettings.json
 builder.Host.UseSerilog((context, services, configuration) =>
 {
-    configuration.ReadFrom.Configuration(context.Configuration);
+    configuration.ReadFrom.Configuration(context.Configuration)
+        .Enrich.WithClassName();
 });
 
 builder.Services.AddDbContext<SakilaDbContext>(optionsBuilder =>
@@ -26,6 +27,7 @@ builder.Services.AddMapster();
 builder.Services.AddScoped<ActorService>();
 builder.Services.AddScoped<AddressService>();
 builder.Services.AddScoped<CityService>();
+builder.Services.AddScoped<FilmService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
