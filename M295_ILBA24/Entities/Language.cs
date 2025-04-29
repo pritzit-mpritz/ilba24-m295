@@ -5,7 +5,7 @@ namespace M295_ILBA24.Entities;
 
 public partial class Language
 {
-    public byte LanguageId { get; set; }
+    public int LanguageId { get; set; }
 
     public string Name { get; set; } = null!;
 

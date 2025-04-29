@@ -1,14 +1,14 @@
 namespace M295_ILBA24.DTOs;
 
 public record BaseActorDto(
-    ushort ActorId,
+    int ActorId,
     string FirstName,
     string LastName,
     DateTime LastUpdate
 );
 
 public record FullActorDto(
-    ushort ActorId,
+    int ActorId,
     string FirstName,
     string LastName,
     DateTime LastUpdate,
@@ -16,7 +16,7 @@ public record FullActorDto(
 ) : BaseActorDto(ActorId, FirstName, LastName, LastUpdate);
 
 public record ActorResponseDto(
-    ushort ActorId,
+    int ActorId,
     string FirstName,
     string LastName,
     DateTime LastUpdate,

@@ -23,7 +23,7 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
         return pagedActorsResponse.Select(GenerateActorResponseDto).ToList();
     }
 
-    public async Task<ActorResponseDto> GetActorByIdAsync(ushort id)
+    public async Task<ActorResponseDto> GetActorByIdAsync(int id)
     {
         // Schauspieler aus Datenbank auslesen --> Join auf FilmActors und Film
         var actor = await dbContext
@@ -71,7 +71,7 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
         return await GetActorByIdAsync(actor.ActorId);
     }
 
-    public async Task UpdateActorAsync(ushort id, [FromBody] Actor actor)
+    public async Task UpdateActorAsync(int id, [FromBody] Actor actor)
     {
         var actorFromDb = await dbContext.Actors.FindAsync(id);
         if (actorFromDb == null)
@@ -86,7 +86,7 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteActorAsync(ushort id)
+    public async Task DeleteActorAsync(int id)
     {
         var actor = await dbContext.Actors.FindAsync(id);
         if (actor == null)
@@ -98,7 +98,7 @@ public class ActorService(ILogger<ActorService> logger, SakilaDbContext dbContex
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task AddFilmToActorAsync(ushort actorId, ushort filmId)
+    public async Task AddFilmToActorAsync(int actorId, int filmId)
     {
         var actor = await dbContext.Actors
             .Include(a => a.FilmActors)

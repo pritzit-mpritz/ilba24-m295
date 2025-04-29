@@ -3,12 +3,12 @@ namespace M295_ILBA24.DTOs;
 public record FilmRequestDto(
     string? Title,
     string? Description,
-    short? ReleaseYear,
-    byte LanguageId,
-    byte? OriginalLanguageId,
-    byte RentalDuration,
+    int? ReleaseYear,
+    int LanguageId,
+    int? OriginalLanguageId,
+    int RentalDuration,
     decimal RentalRate,
-    ushort Length,
+    int Length,
     decimal ReplacementCost,
     string? Rating
 );

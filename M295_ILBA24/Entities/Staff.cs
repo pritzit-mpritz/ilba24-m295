@@ -5,19 +5,19 @@ namespace M295_ILBA24.Entities;
 
 public partial class Staff
 {
-    public byte StaffId { get; set; }
+    public int StaffId { get; set; }
 
     public string FirstName { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
 
-    public ushort AddressId { get; set; }
+    public int AddressId { get; set; }
 
-    public byte[]? Picture { get; set; }
+    public int[]? Picture { get; set; }
 
     public string? Email { get; set; }
 
-    public byte StoreId { get; set; }
+    public int StoreId { get; set; }
 
     public bool? Active { get; set; }
 

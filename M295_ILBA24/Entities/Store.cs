@@ -5,11 +5,11 @@ namespace M295_ILBA24.Entities;
 
 public partial class Store
 {
-    public byte StoreId { get; set; }
+    public int StoreId { get; set; }
 
-    public byte ManagerStaffId { get; set; }
+    public int ManagerStaffId { get; set; }
 
-    public ushort AddressId { get; set; }
+    public int AddressId { get; set; }
 
     public DateTime LastUpdate { get; set; }
 

@@ -8,7 +8,7 @@ public class AddressRequestDto
 
     public string? District { get; set; }
 
-    public ushort? CityId { get; set; }
+    public int? CityId { get; set; }
 
     public string? PostalCode { get; set; }
 

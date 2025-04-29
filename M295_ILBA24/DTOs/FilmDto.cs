@@ -1,30 +1,30 @@
 namespace M295_ILBA24.DTOs;
 
 public record BaseFilmDto(
-    ushort FilmId,
+    int FilmId,
     string? Title,
     string? Description,
-    short? ReleaseYear,
-    byte LanguageId,
-    byte? OriginalLanguageId,
-    byte RentalDuration,
+    int? ReleaseYear,
+    int LanguageId,
+    int? OriginalLanguageId,
+    int RentalDuration,
     decimal RentalRate,
-    ushort Length,
+    int Length,
     decimal ReplacementCost,
     string? Rating,
     DateTime LastUpdate
 );
 
 public record FilmResponseDto(
-    ushort FilmId,
+    int FilmId,
     string? Title,
     string? Description,
-    short? ReleaseYear,
-    byte LanguageId,
-    byte? OriginalLanguageId,
-    byte RentalDuration,
+    int? ReleaseYear,
+    int LanguageId,
+    int? OriginalLanguageId,
+    int RentalDuration,
     decimal RentalRate,
-    ushort Length,
+    int Length,
     decimal ReplacementCost,
     string? Rating,
     DateTime LastUpdate,

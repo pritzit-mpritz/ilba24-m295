@@ -21,7 +21,7 @@ public class FilmController(ILogger<FilmController> logger, FilmService service)
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<FilmResponseDto>> GetById([FromRoute] ushort id)
+    public async Task<ActionResult<FilmResponseDto>> GetById([FromRoute] int id)
     {
         var film = await service.GetFilmById(id);
         if (film == null)
@@ -45,7 +45,7 @@ public class FilmController(ILogger<FilmController> logger, FilmService service)
     }
 
     [HttpPut("{id:int}")]
-    public async Task<ActionResult<FilmResponseDto>> Update([FromRoute] ushort id,
+    public async Task<ActionResult<FilmResponseDto>> Update([FromRoute] int id,
         [FromBody] FilmRequestDto filmRequestDto)
     {
         logger.LogInformation("Updating film {id} with data {@film}", id, filmRequestDto);
@@ -60,7 +60,7 @@ public class FilmController(ILogger<FilmController> logger, FilmService service)
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult> Delete([FromRoute] ushort id)
+    public async Task<ActionResult> Delete([FromRoute] int id)
     {
         logger.LogInformation("Deleting film {id}", id);
         var film = await service.DeleteFilm(id);

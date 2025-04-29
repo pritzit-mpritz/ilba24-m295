@@ -5,9 +5,9 @@ namespace M295_ILBA24.Entities;
 
 public partial class FilmCategory
 {
-    public ushort FilmId { get; set; }
+    public int FilmId { get; set; }
 
-    public byte CategoryId { get; set; }
+    public int CategoryId { get; set; }
 
     public DateTime LastUpdate { get; set; }
 

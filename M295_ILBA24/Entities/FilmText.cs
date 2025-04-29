@@ -5,7 +5,7 @@ namespace M295_ILBA24.Entities;
 
 public partial class FilmText
 {
-    public short FilmId { get; set; }
+    public int FilmId { get; set; }
 
     public string Title { get; set; } = null!;
 

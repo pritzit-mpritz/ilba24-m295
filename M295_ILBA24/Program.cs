@@ -1,9 +1,12 @@
 using System.Reflection;
+using HotChocolate.AspNetCore;
 using M295_ILBA24.Context;
+using M295_ILBA24.Controllers;
 using M295_ILBA24.Services;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Path = System.IO.Path;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +24,14 @@ builder.Services.AddDbContext<SakilaDbContext>(optionsBuilder =>
         ServerVersion.Parse("8.1.0-mysql")
     )
 );
+builder.Services
+    .AddGraphQLServer()
+    .RegisterDbContextFactory<SakilaDbContext>()
+    .AddQueryType<Query>()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting();
 
-builder.Services.AddMapster();
 
 builder.Services.AddScoped<ActorService>();
 builder.Services.AddScoped<AddressService>();
@@ -41,12 +50,26 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+app.UseRouting();
+app.MapGraphQL().WithOptions(new GraphQLServerOptions
+    {
+        Tool =
+        {
+            Enable = true,
+            Title = "Sakila GraphQL",
+            GraphQLEndpoint = "/graphql",
+            ServeMode = GraphQLToolServeMode.Embedded
+        }
+    }
+);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseAuthorization();
 

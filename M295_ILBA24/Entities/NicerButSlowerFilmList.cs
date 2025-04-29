@@ -5,7 +5,7 @@ namespace M295_ILBA24.Entities;
 
 public partial class NicerButSlowerFilmList
 {
-    public ushort? Fid { get; set; }
+    public int? Fid { get; set; }
 
     public string? Title { get; set; }
 
@@ -15,7 +15,7 @@ public partial class NicerButSlowerFilmList
 
     public decimal? Price { get; set; }
 
-    public ushort? Length { get; set; }
+    public int? Length { get; set; }
 
     public string? Rating { get; set; }
 

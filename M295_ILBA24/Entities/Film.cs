@@ -5,23 +5,23 @@ namespace M295_ILBA24.Entities;
 
 public partial class Film
 {
-    public ushort FilmId { get; set; }
+    public int FilmId { get; set; }
 
     public string Title { get; set; } = null!;
 
     public string? Description { get; set; }
 
-    public short? ReleaseYear { get; set; }
+    public int? ReleaseYear { get; set; }
 
-    public byte LanguageId { get; set; }
+    public int LanguageId { get; set; }
 
-    public byte? OriginalLanguageId { get; set; }
+    public int? OriginalLanguageId { get; set; }
 
-    public byte RentalDuration { get; set; }
+    public int RentalDuration { get; set; }
 
     public decimal RentalRate { get; set; }
 
-    public ushort? Length { get; set; }
+    public int? Length { get; set; }
 
     public decimal ReplacementCost { get; set; }
 

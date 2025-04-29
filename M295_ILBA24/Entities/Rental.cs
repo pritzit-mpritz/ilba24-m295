@@ -11,11 +11,11 @@ public partial class Rental
 
     public uint InventoryId { get; set; }
 
-    public ushort CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
     public DateTime? ReturnDate { get; set; }
 
-    public byte StaffId { get; set; }
+    public int StaffId { get; set; }
 
     public DateTime LastUpdate { get; set; }
 

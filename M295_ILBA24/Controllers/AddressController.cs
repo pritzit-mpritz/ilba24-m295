@@ -40,7 +40,7 @@ public class AddressController(ILogger<AddressController> logger, AddressService
     }
 
     [HttpPut("{id:int}")]
-    public async Task<ActionResult<AddressResponseDto>> UpdateAddressAsync(ushort id,
+    public async Task<ActionResult<AddressResponseDto>> UpdateAddressAsync(int id,
         [FromBody] AddressRequestDto addressRequestDto)
     {
         try

@@ -26,7 +26,7 @@ public class CityService(ILogger<CityService> logger, SakilaDbContext context)
         return cities.Adapt<List<CityResponseDto>>();
     }
     
-    public async Task<CityResponseDto> FindCityById(ushort id)
+    public async Task<CityResponseDto> FindCityById(int id)
     {
         logger.LogInformation("FindCityById called with id {id}", id);
 
@@ -52,7 +52,7 @@ public class CityService(ILogger<CityService> logger, SakilaDbContext context)
         return await FindCityById(city.CityId);
     }
 
-    public async Task<CityResponseDto> UpdateCity(ushort id, CityRequestDto requestDto)
+    public async Task<CityResponseDto> UpdateCity(int id, CityRequestDto requestDto)
     {
         var city = await context.Cities
             .Where(c => c.CityId == id)

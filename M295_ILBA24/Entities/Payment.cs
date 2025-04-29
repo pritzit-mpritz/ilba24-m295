@@ -5,11 +5,11 @@ namespace M295_ILBA24.Entities;
 
 public partial class Payment
 {
-    public ushort PaymentId { get; set; }
+    public int PaymentId { get; set; }
 
-    public ushort CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
-    public byte StaffId { get; set; }
+    public int StaffId { get; set; }
 
     public int? RentalId { get; set; }
 

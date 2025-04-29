@@ -5,7 +5,7 @@ namespace M295_ILBA24.Entities;
 
 public partial class StaffList
 {
-    public byte Id { get; set; }
+    public int Id { get; set; }
 
     public string? Name { get; set; }
 
@@ -19,5 +19,5 @@ public partial class StaffList
 
     public string Country { get; set; } = null!;
 
-    public byte Sid { get; set; }
+    public int Sid { get; set; }
 }

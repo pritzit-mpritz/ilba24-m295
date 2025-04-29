@@ -20,7 +20,7 @@ public class CityController(ILogger<CityController> logger, CityService service)
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<ICollection<CityResponseDto>>> GetCityById(ushort id)
+    public async Task<ActionResult<ICollection<CityResponseDto>>> GetCityById(int id)
     {
         logger.LogInformation("GetCityById called from User Agent {userAgent}",
             HttpContext.Request.Headers["User-Agent"]);
@@ -53,7 +53,7 @@ public class CityController(ILogger<CityController> logger, CityService service)
     }
     
     [HttpPut("{id:int}")]
-    public async Task<ActionResult<CityResponseDto>> UpdateCity(ushort id, [FromBody] CityRequestDto requestDto)
+    public async Task<ActionResult<CityResponseDto>> UpdateCity(int id, [FromBody] CityRequestDto requestDto)
     {
         logger.LogInformation("UpdateCity called from User Agent {userAgent}",
             HttpContext.Request.Headers["User-Agent"]);

@@ -5,7 +5,7 @@ namespace M295_ILBA24.Entities;
 
 public partial class CustomerList
 {
-    public ushort Id { get; set; }
+    public int Id { get; set; }
 
     public string? Name { get; set; }
 
@@ -21,5 +21,5 @@ public partial class CustomerList
 
     public string Notes { get; set; } = null!;
 
-    public byte Sid { get; set; }
+    public int Sid { get; set; }
 }

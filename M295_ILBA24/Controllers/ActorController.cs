@@ -36,7 +36,7 @@ public class ActorController(ILogger<ActorController> logger, ActorService servi
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<ActorResponseDto>> GetActorByIdAsync(ushort id)
+    public async Task<ActionResult<ActorResponseDto>> GetActorByIdAsync(int id)
     {
         try
         {
@@ -56,7 +56,7 @@ public class ActorController(ILogger<ActorController> logger, ActorService servi
     }
 
     [HttpPut("{id:int}")]
-    public async Task<ActionResult> UpdateActorAsync(ushort id, [FromBody] Actor actor)
+    public async Task<ActionResult> UpdateActorAsync(int id, [FromBody] Actor actor)
     {
         try
         {
@@ -70,7 +70,7 @@ public class ActorController(ILogger<ActorController> logger, ActorService servi
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult> DeleteActorAsync(ushort id)
+    public async Task<ActionResult> DeleteActorAsync(int id)
     {
         try
         {
@@ -84,7 +84,7 @@ public class ActorController(ILogger<ActorController> logger, ActorService servi
     }
     
     [HttpPost("{actorId:int}/film/{filmId:int}")]
-    public async Task<ActionResult> AddFilmToActorAsync(ushort actorId, ushort filmId)
+    public async Task<ActionResult> AddFilmToActorAsync(int actorId, int filmId)
     {
         try
         {

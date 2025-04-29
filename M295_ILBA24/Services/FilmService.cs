@@ -35,7 +35,7 @@ public class FilmService (ILogger<FilmService> logger, SakilaDbContext context)
         return films.Adapt<ICollection<FilmResponseDto>>();
     }
     
-    public async Task<FilmResponseDto?> GetFilmById(ushort id)
+    public async Task<FilmResponseDto?> GetFilmById(int id)
     {
         var film = await context.Films
             .Include(f => f.FilmActors)
@@ -54,7 +54,7 @@ public class FilmService (ILogger<FilmService> logger, SakilaDbContext context)
         return film.Adapt<FilmResponseDto>();
     }
 
-    public async Task<FilmResponseDto?> UpdateFilm(ushort id, FilmRequestDto filmRequestDto)
+    public async Task<FilmResponseDto?> UpdateFilm(int id, FilmRequestDto filmRequestDto)
     {
         var film = await context.Films.FindAsync(id);
         if (film == null)
@@ -67,7 +67,7 @@ public class FilmService (ILogger<FilmService> logger, SakilaDbContext context)
         return await GetFilmById(id);
     }
 
-    public async Task<bool> DeleteFilm(ushort id)
+    public async Task<bool> DeleteFilm(int id)
     {
         var film = await context.Films.FindAsync(id);
         if (film == null)

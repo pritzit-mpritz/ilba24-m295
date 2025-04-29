@@ -23,7 +23,7 @@ public class AddressService(ILogger<AddressService> logger, SakilaDbContext cont
         return mappedAddresses.ToList();
     }
 
-    public async Task<AddressResponseDto> FindAddressById(ushort id)
+    public async Task<AddressResponseDto> FindAddressById(int id)
     {
         logger.LogInformation("FindAddressById called with id {id}", id);
 
@@ -68,7 +68,7 @@ public class AddressService(ILogger<AddressService> logger, SakilaDbContext cont
         };
     }
 
-    public async Task<AddressResponseDto> UpdateAddressAsync(ushort id, AddressRequestDto addressRequestDto)
+    public async Task<AddressResponseDto> UpdateAddressAsync(int id, AddressRequestDto addressRequestDto)
     {
         var address = await context.Addresses.FindAsync(id);
 
