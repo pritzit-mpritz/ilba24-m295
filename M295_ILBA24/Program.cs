@@ -28,6 +28,7 @@ builder.Services.AddScoped<ActorService>();
 builder.Services.AddScoped<AddressService>();
 builder.Services.AddScoped<CityService>();
 builder.Services.AddScoped<FilmService>();
+builder.Services.AddScoped<CustomerService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

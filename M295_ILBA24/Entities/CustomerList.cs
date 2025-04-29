@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace M295_ILBA24.Entities;
+﻿namespace M295_ILBA24.Entities;
 
 public partial class CustomerList
 {
